@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60% </span>
+                <span class="strong">58.82% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/20</span>
+                <span class='fraction'>10/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/6</span>
+                <span class='fraction'>1/4</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">50% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>2/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">60% </span>
-                <span class="quiet">Functions</span>
-                <span class='fraction'>3/5</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">64.7% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/17</span>
+                <span class='fraction'>9/15</span>
             </div>
         
             
@@ -119,7 +119,11 @@
 <a name='L54'></a><a href='#L54'>54</a>
 <a name='L55'></a><a href='#L55'>55</a>
 <a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -142,10 +146,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -175,8 +175,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import { fetchAppointmentById } from "../services/appointmentsApi";
 &nbsp;
 export default function AppointmentDetail() {
   const { id } = useParams();
@@ -188,18 +195,14 @@ export default function AppointmentDetail() {
     setLoading(true);
     setError(null);
 &nbsp;
-    fetch(`/api/appointments/${id}`)
-      .then(<span class="fstat-no" title="function not covered" >res =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        if (!res.ok) <span class="cstat-no" title="statement not covered" >throw new Error("Cita no encontrada");</span></span>
-<span class="cstat-no" title="statement not covered" >        return res.json();</span>
-      })
+    fetchAppointmentById(id)
       .then(<span class="fstat-no" title="function not covered" >data =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        setAppointment(data);</span>
 <span class="cstat-no" title="statement not covered" >        setLoading(false);</span>
       })
-      .catch(err =&gt; {
-        setError(err.message);
-        setLoading(false);
+      .catch(<span class="fstat-no" title="function not covered" >err =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        setError(err.message);</span>
+<span class="cstat-no" title="statement not covered" >        setLoading(false);</span>
       });
   }, [id]);
 &nbsp;
@@ -209,8 +212,14 @@ export default function AppointmentDetail() {
 <span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;div className="min-h-screen flex flex-col justify-between bg-gray-900"&gt;
       &lt;div className="max-w-xl mx-auto p-6 flex-grow"&gt;
+        &lt;Link to="/" className="text-blue-400 underline mb-4 inline-block"&gt;
+          ← Volver
+        &lt;/Link&gt;
+&nbsp;
         &lt;div className="bg-gray-800 text-white border border-gray-700 p-6 rounded shadow"&gt;
-          &lt;h2 className="text-2xl font-bold mb-4"&gt;Cita de {appointment.pet}&lt;/h2&gt;
+          &lt;h2 className="text-2xl font-bold mb-4"&gt;
+            Cita de {appointment.pet}
+          &lt;/h2&gt;
 &nbsp;
           &lt;div className="mb-2"&gt;&lt;strong&gt;Propietario:&lt;/strong&gt; {appointment.owner}&lt;/div&gt;
           &lt;div className="mb-2"&gt;&lt;strong&gt;Teléfono:&lt;/strong&gt; {appointment.phone}&lt;/div&gt;
@@ -238,7 +247,7 @@ export default function AppointmentDetail() {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-18T03:22:11.368Z
+                at 2025-12-18T13:25:21.189Z
             </div>
         <script src="../prettify.js"></script>
         <script>

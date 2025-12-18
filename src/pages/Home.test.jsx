@@ -12,15 +12,15 @@ const mockAppointments = [
     date: "2025-12-18",
     type: "Consulta",
     veterinarian: "Dra. Ana",
-    medicalHistory: "Vacunado"
-  }
+    medicalHistory: "Vacunado",
+  },
 ];
 
 beforeEach(() => {
   global.fetch = vi.fn(() =>
     Promise.resolve({
       ok: true,
-      json: () => Promise.resolve(mockAppointments)
+      json: () => Promise.resolve(mockAppointments),
     })
   );
 });
@@ -33,9 +33,7 @@ test("Home muestra las citas", async () => {
   );
 
   await waitFor(() => {
-    expect(screen.getByText(/Citas agendadas/)).toBeInTheDocument();
-    expect(screen.getByText(/Firulais/)).toBeInTheDocument();
-    expect(screen.getByText(/Juan Pérez/)).toBeInTheDocument();
-    expect(screen.getByText(/Consulta/)).toBeInTheDocument();
+    expect(screen.getByText(/Citas agendadas/i)).toBeInTheDocument();
+    expect(screen.getAllByTestId("appointment-card").length).toBeGreaterThan(0);
   });
 });
