@@ -34,7 +34,7 @@ Permite visualizar citas agendadas, acceder al detalle de cada una y navegar de 
 ### 1️⃣ Clonar el repositorio
 
 ```bash
-git clone <url-del-repositorio>
+git clone <https://github.com/JulioAlejandroSalazar/Veterinaria-React.git>
 cd veterinaria-cuidado-animal
 ```
 
