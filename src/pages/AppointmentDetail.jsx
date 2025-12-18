@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import { fetchAppointmentById } from "../services/appointmentsApi";
 
 export default function AppointmentDetail() {
   const { id } = useParams();
@@ -11,11 +12,7 @@ export default function AppointmentDetail() {
     setLoading(true);
     setError(null);
 
-    fetch(`/api/appointments/${id}`)
-      .then(res => {
-        if (!res.ok) throw new Error("Cita no encontrada");
-        return res.json();
-      })
+    fetchAppointmentById(id)
       .then(data => {
         setAppointment(data);
         setLoading(false);
@@ -32,8 +29,14 @@ export default function AppointmentDetail() {
   return (
     <div className="min-h-screen flex flex-col justify-between bg-gray-900">
       <div className="max-w-xl mx-auto p-6 flex-grow">
+        <Link to="/" className="text-blue-400 underline mb-4 inline-block">
+          ← Volver
+        </Link>
+
         <div className="bg-gray-800 text-white border border-gray-700 p-6 rounded shadow">
-          <h2 className="text-2xl font-bold mb-4">Cita de {appointment.pet}</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            Cita de {appointment.pet}
+          </h2>
 
           <div className="mb-2"><strong>Propietario:</strong> {appointment.owner}</div>
           <div className="mb-2"><strong>Teléfono:</strong> {appointment.phone}</div>

@@ -1,43 +1,109 @@
 export const mockAppointments = [
-    {
-      id: 1,
-      pet: "Firulais",
-      owner: "Juan Pérez",
-      phone: "123456789",
-      address: "Calle Falsa 123",
-      species: "Perro",
-      breed: "Labrador",
-      age: 5,
-      medicalHistory: "Vacunas al día, sin alergias",
-      date: "2025-12-18",
-      type: "Consulta",
-      veterinarian: "Dra. Ana"
-    },
-    {
-      id: 2,
-      pet: "Michi",
-      owner: "María López",
-      phone: "987654321",
-      address: "Avenida Siempre Viva 742",
-      species: "Gato",
-      breed: "Siames",
-      age: 3,
-      medicalHistory: "Alergia a pescados",
-      date: "2025-12-20",
-      type: "Vacuna",
-      veterinarian: "Dr. Carlos"
-    },
-  ];
-  
-  export const fetchAppointments = async (day) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        if (day) {
-          resolve(mockAppointments.filter(a => a.date === day).slice(0, 8))
-        } else {
-          resolve(mockAppointments)
-        }
-      }, 400);
-    });
-  };
-  
+  {
+    id: "1",
+    pet: "Luna",
+    owner: "Carlos Pérez",
+    veterinarian: "Dra. Martínez",
+    date: "2025-12-18",
+    medicalHistory: "Vacunación anual completa",
+    phone: "123456789",
+    address: "Calle Falsa 123",
+    species: "Gato",
+    breed: "Siames",
+    age: 4,
+    type: "Vacuna"
+  },
+  {
+    id: "2",
+    pet: "Max",
+    owner: "Ana Gómez",
+    veterinarian: "Dr. López",
+    date: "2025-12-19",
+    medicalHistory: "Control post operatorio",
+    phone: "987654321",
+    address: "Avenida Siempre Viva 742",
+    species: "Perro",
+    breed: "Labrador",
+    age: 5,
+    type: "Consulta"
+  },
+  {
+    id: "3",
+    pet: "Milo",
+    owner: "Laura Fernández",
+    veterinarian: "Dra. Ana",
+    date: "2025-12-20",
+    medicalHistory: "Alergia a pescado",
+    phone: "234567890",
+    address: "Calle del Sol 10",
+    species: "Gato",
+    breed: "Persa",
+    age: 3,
+    type: "Consulta"
+  },
+  {
+    id: "4",
+    pet: "Rocky",
+    owner: "Jorge Ramírez",
+    veterinarian: "Dr. Carlos",
+    date: "2025-12-21",
+    medicalHistory: "Desparasitación mensual",
+    phone: "345678901",
+    address: "Av. Central 50",
+    species: "Perro",
+    breed: "Bulldog",
+    age: 6,
+    type: "Consulta"
+  },
+  {
+    id: "5",
+    pet: "Nina",
+    owner: "Sofía Morales",
+    veterinarian: "Dra. Martínez",
+    date: "2025-12-22",
+    medicalHistory: "Vacunas al día, sin alergias",
+    phone: "456789012",
+    address: "Calle Primavera 45",
+    species: "Gato",
+    breed: "Sphynx",
+    age: 2,
+    type: "Vacuna"
+  },
+  {
+    id: "6",
+    pet: "Thor",
+    owner: "Miguel Torres",
+    veterinarian: "Dr. López",
+    date: "2025-12-23",
+    medicalHistory: "Problemas digestivos leves",
+    phone: "567890123",
+    address: "Calle Luna 12",
+    species: "Perro",
+    breed: "Golden Retriever",
+    age: 7,
+    type: "Consulta"
+  }
+];
+
+export const fetchAppointments = async (day) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      if (day) {
+        resolve(mockAppointments.filter(a => a.date === day));
+      } else {
+        resolve(mockAppointments);
+      }
+    }, 300);
+  });
+};
+
+export const fetchAppointmentById = async (id) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const appointment = mockAppointments.find(a => a.id === id);
+      appointment
+        ? resolve(appointment)
+        : reject(new Error("Cita no encontrada"));
+    }, 300);
+  });
+};
